@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Jersey 25', sans-serif;
+            background: linear-gradient(180deg, #0d0d2b, #1a1a59);
+            height: 100vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 100px;
+            text-shadow: 2px 2px 5px black;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        input {
+            padding: 15px;
+            width: 300px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 20px;
+            background-color: #e0e0e0;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #e0e0e0;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #c0c0c0;
+        }
+
+        .result {
+            font-size: 45px; /* Adjust the size as needed */
+            font-weight: bold;
+            text-shadow: 1px 1px 3px black;
+            margin-top: 20px;
+        }
+
+        /* Add the keyframes animation for the result */
+        @keyframes glowEffect {
+            0% {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+            }
+            50% {
+                text-shadow: 0 0 25px #ff6600, 0 0 50px #ff6600, 0 0 75px #ff6600;
+            }
+            100% {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+            }
+        }
+
+        /* Animation applied when the result is shown */
+        .animateResult {
+            animation: glowEffect 3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Number Picker</h1>
+    <p>Enter a number to get a random number between 1 and your input.</p>
+    <input type="number" id="maxNumber" placeholder="Enter a number" min="1">
+    <button id="submitButton" onclick="generateRandomNumber()">Submit</button>
+    <br><br>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        function generateRandomNumber() {
+            const maxNumber = document.getElementById("maxNumber").value;
+            const resultElement = document.getElementById("result");
+
+            // Generate random number and display result
+            if (maxNumber && maxNumber > 0) {
+                const randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+                resultElement.textContent = `Random number: ${randomNumber}`;
+
+                // Add animation to the result text
+                resultElement.classList.add("animateResult");
+
+                // Remove the animation after 3 seconds
+                setTimeout(() => {
+                    resultElement.classList.remove("animateResult");
+                }, 3000);
+            } else {
+                resultElement.textContent = "Please enter a valid number greater than 0.";
+            }
+        }
+    </script>
+</body>
+</html>
